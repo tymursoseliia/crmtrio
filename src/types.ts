@@ -1,0 +1,25 @@
+export type LeadStatus = 
+  | 'Договор сделан'
+  | 'Дал реквизиты'
+  | 'Оплата за растаможку'
+  | 'Оплата за авто'
+  | 'Оплата за утиль'
+  | 'Оплата за госпошлину'
+  | 'Оплата за залоговый платеж'
+  | 'Оплата прочее'
+  | 'Завершено'
+  | 'Потеряно';
+
+export type Manager = 'Игорь' | 'Андрей';
+
+export interface Lead {
+  id: string;
+  fullName: string;
+  phone: string;
+  secondPhone?: string;
+  email?: string;
+  depositAmount: number;
+  manager: Manager;
+  status: LeadStatus;
+  createdAt: number;
+}
