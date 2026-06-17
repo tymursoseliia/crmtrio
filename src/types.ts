@@ -18,7 +18,14 @@ export interface Lead {
   phone: string;
   secondPhone?: string;
   email?: string;
-  depositAmount: number;
+  
+  amountCar: number;
+  amountCustoms: number;
+  amountScrap: number;
+  amountDuty: number;
+  amountPledge: number;
+  amountOther: number;
+
   manager: Manager;
   status: LeadStatus;
   createdAt: number;

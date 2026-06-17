@@ -21,7 +21,14 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
     phone: '',
     secondPhone: '',
     email: '',
-    depositAmount: 0,
+    
+    amountCar: 0,
+    amountCustoms: 0,
+    amountScrap: 0,
+    amountDuty: 0,
+    amountPledge: 0,
+    amountOther: 0,
+
     manager: 'Игорь' as Manager,
     status: 'Договор сделан' as LeadStatus
   });
@@ -33,7 +40,14 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         phone: leadToEdit.phone,
         secondPhone: leadToEdit.secondPhone || '',
         email: leadToEdit.email || '',
-        depositAmount: leadToEdit.depositAmount,
+        
+        amountCar: leadToEdit.amountCar,
+        amountCustoms: leadToEdit.amountCustoms,
+        amountScrap: leadToEdit.amountScrap,
+        amountDuty: leadToEdit.amountDuty,
+        amountPledge: leadToEdit.amountPledge,
+        amountOther: leadToEdit.amountOther,
+
         manager: leadToEdit.manager,
         status: leadToEdit.status
       });
@@ -43,7 +57,14 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         phone: '',
         secondPhone: '',
         email: '',
-        depositAmount: 0,
+        
+        amountCar: 0,
+        amountCustoms: 0,
+        amountScrap: 0,
+        amountDuty: 0,
+        amountPledge: 0,
+        amountOther: 0,
+
         manager: 'Игорь',
         status: 'Договор сделан'
       });
@@ -76,81 +97,132 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         </div>
         
         <form onSubmit={handleSubmit} className="modal-form">
-          <div className="form-group">
-            <label>ФИО клиента <span>*</span></label>
-            <input 
-              required
-              type="text" 
-              value={formData.fullName}
-              onChange={e => setFormData({...formData, fullName: e.target.value})}
-              placeholder="Иванов Иван Иванович"
-            />
-          </div>
-
-          <div className="form-row">
+          <div className="form-section">
+            <h3>Контакты</h3>
             <div className="form-group">
-              <label>Телефон <span>*</span></label>
+              <label>ФИО клиента <span>*</span></label>
               <input 
                 required
                 type="text" 
-                value={formData.phone}
-                onChange={e => setFormData({...formData, phone: e.target.value})}
-                placeholder="+7 (999) 000-00-00"
+                value={formData.fullName}
+                onChange={e => setFormData({...formData, fullName: e.target.value})}
+                placeholder="Иванов Иван Иванович"
               />
             </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>Телефон <span>*</span></label>
+                <input 
+                  required
+                  type="text" 
+                  value={formData.phone}
+                  onChange={e => setFormData({...formData, phone: e.target.value})}
+                  placeholder="+7 (999) 000-00-00"
+                />
+              </div>
+              <div className="form-group">
+                <label>Второй телефон</label>
+                <input 
+                  type="text" 
+                  value={formData.secondPhone}
+                  onChange={e => setFormData({...formData, secondPhone: e.target.value})}
+                  placeholder="+7 (999) 000-00-00"
+                />
+              </div>
+            </div>
+
             <div className="form-group">
-              <label>Второй телефон</label>
+              <label>Email</label>
               <input 
-                type="text" 
-                value={formData.secondPhone}
-                onChange={e => setFormData({...formData, secondPhone: e.target.value})}
-                placeholder="+7 (999) 000-00-00"
+                type="email" 
+                value={formData.email}
+                onChange={e => setFormData({...formData, email: e.target.value})}
+                placeholder="client@example.com"
               />
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Email</label>
-            <input 
-              type="email" 
-              value={formData.email}
-              onChange={e => setFormData({...formData, email: e.target.value})}
-              placeholder="client@example.com"
-            />
+          <div className="form-section">
+            <h3>Финансы (₽)</h3>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Сумма за машину</label>
+                <input 
+                  type="number" min="0" value={formData.amountCar || ''}
+                  onChange={e => setFormData({...formData, amountCar: Number(e.target.value)})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Сумма за растаможку</label>
+                <input 
+                  type="number" min="0" value={formData.amountCustoms || ''}
+                  onChange={e => setFormData({...formData, amountCustoms: Number(e.target.value)})}
+                />
+              </div>
+            </div>
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label>Сумма за утиль</label>
+                <input 
+                  type="number" min="0" value={formData.amountScrap || ''}
+                  onChange={e => setFormData({...formData, amountScrap: Number(e.target.value)})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Сумма за госпошлину</label>
+                <input 
+                  type="number" min="0" value={formData.amountDuty || ''}
+                  onChange={e => setFormData({...formData, amountDuty: Number(e.target.value)})}
+                />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>Залоговый платеж</label>
+                <input 
+                  type="number" min="0" value={formData.amountPledge || ''}
+                  onChange={e => setFormData({...formData, amountPledge: Number(e.target.value)})}
+                />
+              </div>
+              <div className="form-group">
+                <label>Прочее</label>
+                <input 
+                  type="number" min="0" value={formData.amountOther || ''}
+                  onChange={e => setFormData({...formData, amountOther: Number(e.target.value)})}
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label>Сумма депозита (₽) <span>*</span></label>
-            <input 
-              required
-              type="number"
-              min="0"
-              value={formData.depositAmount}
-              onChange={e => setFormData({...formData, depositAmount: Number(e.target.value)})}
-            />
-          </div>
+          <div className="form-section">
+            <h3>Управление</h3>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Менеджер <span>*</span></label>
+                <select 
+                  value={formData.manager}
+                  onChange={e => setFormData({...formData, manager: e.target.value as Manager})}
+                >
+                  <option value="Игорь">Игорь</option>
+                  <option value="Андрей">Андрей</option>
+                </select>
+              </div>
 
-          <div className="form-group">
-            <label>Ответственный менеджер <span>*</span></label>
-            <select 
-              value={formData.manager}
-              onChange={e => setFormData({...formData, manager: e.target.value as Manager})}
-            >
-              <option value="Игорь">Игорь</option>
-              <option value="Андрей">Андрей</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Статус <span>*</span></label>
-            <select 
-              value={formData.status}
-              onChange={e => setFormData({...formData, status: e.target.value as LeadStatus})}
-            >
-              {STATUSES.map(status => (
-                <option key={status} value={status}>{status}</option>
-              ))}
-            </select>
+              <div className="form-group">
+                <label>Статус <span>*</span></label>
+                <select 
+                  value={formData.status}
+                  onChange={e => setFormData({...formData, status: e.target.value as LeadStatus})}
+                >
+                  {STATUSES.map(status => (
+                    <option key={status} value={status}>{status}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
           </div>
 
           <div className="modal-actions">

@@ -10,13 +10,18 @@ export const LeadTable = ({ onEdit }: LeadTableProps) => {
 
   if (loading) return null;
 
+  const getTotalAmount = (lead: Lead) => {
+    return lead.amountCar + lead.amountCustoms + lead.amountScrap + 
+           lead.amountDuty + lead.amountPledge + lead.amountOther;
+  };
+
   return (
     <div className="table-container">
       <table className="leads-table">
         <thead>
           <tr>
             <th>Клиент</th>
-            <th>Сумма</th>
+            <th>Сумма (Итого)</th>
             <th>Статус</th>
             <th>Менеджер</th>
             <th>Действия</th>
@@ -34,7 +39,9 @@ export const LeadTable = ({ onEdit }: LeadTableProps) => {
                   </div>
                 </div>
               </td>
-              <td className="amount-cell">{lead.depositAmount.toLocaleString('ru-RU')} ₽</td>
+              <td className="amount-cell">
+                {getTotalAmount(lead).toLocaleString('ru-RU')} ₽
+              </td>
               <td>
                 <span className={`status-badge status-${lead.status.replace(/\s+/g, '-')}`}>
                   {lead.status}
