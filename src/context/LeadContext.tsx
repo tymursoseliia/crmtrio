@@ -65,8 +65,8 @@ export const LeadProvider = ({ children }: { children: ReactNode }) => {
     const dbData = {
       full_name: leadData.fullName,
       phone: leadData.phone,
-      second_phone: leadData.secondPhone,
-      email: leadData.email,
+      second_phone: leadData.secondPhone || null,
+      email: leadData.email || null,
       
       amount_car: leadData.amountCar,
       amount_customs: leadData.amountCustoms,
@@ -99,8 +99,8 @@ export const LeadProvider = ({ children }: { children: ReactNode }) => {
     const dbData: any = {};
     if (updatedLead.fullName !== undefined) dbData.full_name = updatedLead.fullName;
     if (updatedLead.phone !== undefined) dbData.phone = updatedLead.phone;
-    if (updatedLead.secondPhone !== undefined) dbData.second_phone = updatedLead.secondPhone;
-    if (updatedLead.email !== undefined) dbData.email = updatedLead.email;
+    if (updatedLead.secondPhone !== undefined) dbData.second_phone = updatedLead.secondPhone || null;
+    if (updatedLead.email !== undefined) dbData.email = updatedLead.email || null;
     
     if (updatedLead.amountCar !== undefined) dbData.amount_car = updatedLead.amountCar;
     if (updatedLead.amountCustoms !== undefined) dbData.amount_customs = updatedLead.amountCustoms;

@@ -5,6 +5,28 @@ interface LeadTableProps {
   onEdit: (lead: Lead) => void;
 }
 
+const getStatusStyle = (status: string) => {
+  switch (status) {
+    case 'Договор заключен':
+      return { backgroundColor: '#e2e8f0', color: '#334155' };
+    case 'Реквизиты предоставлены':
+      return { backgroundColor: '#ede9fe', color: '#6d28d9' };
+    case 'Оплата авто':
+    case 'Оплата растаможки':
+    case 'Оплата утильсбора':
+    case 'Оплата госпошлины':
+    case 'Залоговый платеж':
+    case 'Прочие платежи':
+      return { backgroundColor: '#fef3c7', color: '#d97706' };
+    case 'Завершено':
+      return { backgroundColor: '#d1fae5', color: '#065f46' };
+    case 'Потеряно':
+      return { backgroundColor: '#fee2e2', color: '#b91c1c' };
+    default:
+      return { backgroundColor: '#f1f5f9', color: '#475569' };
+  }
+};
+
 export const LeadTable = ({ onEdit }: LeadTableProps) => {
   const { leads, loading, deleteLead } = useLeads();
 
@@ -43,7 +65,10 @@ export const LeadTable = ({ onEdit }: LeadTableProps) => {
                 {getTotalAmount(lead).toLocaleString('ru-RU')} ₽
               </td>
               <td>
-                <span className={`status-badge status-${lead.status.replace(/\s+/g, '-')}`}>
+                <span 
+                  className="status-badge"
+                  style={getStatusStyle(lead.status)}
+                >
                   {lead.status}
                 </span>
               </td>

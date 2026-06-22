@@ -3,9 +3,9 @@ import { Lead, LeadStatus, Manager } from '../types';
 import { useLeads } from '../context/LeadContext';
 
 const STATUSES: LeadStatus[] = [
-  'Договор сделан', 'Дал реквизиты', 'Оплата за растаможку', 
-  'Оплата за авто', 'Оплата за утиль', 'Оплата за госпошлину', 
-  'Оплата за залоговый платеж', 'Оплата прочее', 'Завершено', 'Потеряно'
+  'Договор заключен', 'Реквизиты предоставлены', 'Оплата авто', 
+  'Оплата растаможки', 'Оплата утильсбора', 'Оплата госпошлины', 
+  'Залоговый платеж', 'Прочие платежи', 'Завершено', 'Потеряно'
 ];
 
 interface LeadModalProps {
@@ -30,7 +30,7 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
     amountOther: 0,
 
     manager: 'Игорь' as Manager,
-    status: 'Договор сделан' as LeadStatus
+    status: 'Договор заключен' as LeadStatus
   });
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         amountOther: 0,
 
         manager: 'Игорь',
-        status: 'Договор сделан'
+        status: 'Договор заключен'
       });
     }
   }, [leadToEdit, isOpen]);
@@ -82,8 +82,10 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         await addLead(formData);
       }
       onClose();
-    } catch (error) {
-      alert('Ошибка при сохранении лида');
+    } catch (error: any) {
+      console.error('Ошибка сохранения лида:', error);
+      const errorMessage = error?.message || error?.details || JSON.stringify(error);
+      alert('Ошибка при сохранении лида: ' + errorMessage);
     }
   };
 
