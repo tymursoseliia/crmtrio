@@ -25,6 +25,7 @@ const mapDbToLead = (dbLead: any): Lead => ({
   phone: dbLead.phone,
   secondPhone: dbLead.second_phone,
   email: dbLead.email,
+  whoseLead: dbLead.whose_lead,
   
   amountCar: Number(dbLead.amount_car || 0),
   amountCustoms: Number(dbLead.amount_customs || 0),
@@ -67,6 +68,7 @@ export const LeadProvider = ({ children }: { children: ReactNode }) => {
       phone: leadData.phone,
       second_phone: leadData.secondPhone || null,
       email: leadData.email || null,
+      whose_lead: leadData.whoseLead || null,
       
       amount_car: leadData.amountCar,
       amount_customs: leadData.amountCustoms,
@@ -101,6 +103,7 @@ export const LeadProvider = ({ children }: { children: ReactNode }) => {
     if (updatedLead.phone !== undefined) dbData.phone = updatedLead.phone;
     if (updatedLead.secondPhone !== undefined) dbData.second_phone = updatedLead.secondPhone || null;
     if (updatedLead.email !== undefined) dbData.email = updatedLead.email || null;
+    if (updatedLead.whoseLead !== undefined) dbData.whose_lead = updatedLead.whoseLead || null;
     
     if (updatedLead.amountCar !== undefined) dbData.amount_car = updatedLead.amountCar;
     if (updatedLead.amountCustoms !== undefined) dbData.amount_customs = updatedLead.amountCustoms;

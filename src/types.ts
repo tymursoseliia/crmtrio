@@ -18,6 +18,7 @@ export interface Lead {
   phone: string;
   secondPhone?: string;
   email?: string;
+  whoseLead?: string;
   
   amountCar: number;
   amountCustoms: number;

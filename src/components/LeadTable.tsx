@@ -58,6 +58,11 @@ export const LeadTable = ({ onEdit }: LeadTableProps) => {
                   <div>
                     <div className="client-name">{lead.fullName}</div>
                     <div className="client-phone">{lead.phone}</div>
+                    {lead.whoseLead && (
+                      <div className="client-source" style={{ fontSize: '0.75rem', color: '#6366f1', marginTop: '0.125rem' }}>
+                        🔗 {lead.whoseLead}
+                      </div>
+                    )}
                   </div>
                 </div>
               </td>

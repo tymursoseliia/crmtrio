@@ -21,6 +21,7 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
     phone: '',
     secondPhone: '',
     email: '',
+    whoseLead: '',
     
     amountCar: 0,
     amountCustoms: 0,
@@ -40,6 +41,7 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         phone: leadToEdit.phone,
         secondPhone: leadToEdit.secondPhone || '',
         email: leadToEdit.email || '',
+        whoseLead: leadToEdit.whoseLead || '',
         
         amountCar: leadToEdit.amountCar,
         amountCustoms: leadToEdit.amountCustoms,
@@ -57,6 +59,7 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
         phone: '',
         secondPhone: '',
         email: '',
+        whoseLead: '',
         
         amountCar: 0,
         amountCustoms: 0,
@@ -141,6 +144,16 @@ export const LeadModal = ({ isOpen, onClose, leadToEdit }: LeadModalProps) => {
                 value={formData.email}
                 onChange={e => setFormData({...formData, email: e.target.value})}
                 placeholder="client@example.com"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Чей лид</label>
+              <input 
+                type="text" 
+                value={formData.whoseLead}
+                onChange={e => setFormData({...formData, whoseLead: e.target.value})}
+                placeholder="Например, от партнера, рекомендация и т.д."
               />
             </div>
           </div>
